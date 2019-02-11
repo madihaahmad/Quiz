@@ -1,0 +1,61 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.question-box {
+  text-align: left;
+  border: 1px solid lightgray;
+  margin: 3px;
+}
+.correct-answer {
+  color: green;
+  font-weight: 700;
+}
+.explain-box {
+  border: 1px solid lightgray;
+}
+.wrong-answer {
+  color: red;
+}
+.user-answer {
+  font-weight: 700;
+}
+.new-question {
+  text-align: left;
+  border: 1px solid lightgray;
+  margin: 5% 10%;
+  padding: 1% 5%;
+}
+
+.area {
+  /* margin-left: 5%; */
+}
