@@ -2,68 +2,16 @@ import React, { Component } from "react";
 import Modal from "react-responsive-modal";
 import "../App.css";
 
-class Question extends Component {
-  state = { options: [] };
-  render() {
-    return (
-      <div className="question-box">
-        {" "}
-        <h4>
-          Q{this.props.index}.{this.props.question}
-        </h4>
-        <ol>
-          {this.props.choices.map((option, i) => (
-            <li type="A" key={i}>
-              <input
-                type="radio"
-                name={this.props.id}
-                value={option}
-                onClick={e => this.props.saveAnswer(e, this.props.id)}
-              />
-              {option}
-            </li>
-          ))}
-        </ol>
-      </div>
-    );
-  }
-}
-class Solution extends Component {
-  getClass = option => {
-    let optionClass = option === this.props.correct ? "correct-answer" : "";
-    optionClass +=
-      option === this.props.userAnswer && option !== this.props.correct
-        ? " wrong-answer"
-        : "";
-    return optionClass;
-  };
+import Question from "./question";
 
-  render() {
-    return (
-      <div>
-        <div className="question-box">
-          {" "}
-          <h4>
-            Q{this.props.index}.{this.props.question}
-          </h4>
-          <ol>
-            {this.props.choices.map((option, i) => (
-              <li className={this.getClass(option)} key={i} type="A">
-                {option}
-              </li>
-            ))}
-          </ol>
-          <p>
-            <b>{this.props.explanation}</b>
-          </p>
-        </div>
-      </div>
-    );
-  }
-}
+import Solution from "./solution";
 
 class Student extends Component {
-  state = { quiz: [], userAnswers: [], evaluate: false };
+  state = {
+    quiz: [],
+    //   userAnswers: [],
+    evaluate: false
+  };
   componentDidMount() {
     this.setState({ quiz: [...this.props.quiz] });
   }
@@ -76,6 +24,7 @@ class Student extends Component {
     tempState[indx].userAnswer = e.target.value;
     this.setState({ quiz: tempState });
   };
+
   checkAnswer = () => {
     this.setState({ evaluate: true });
   };

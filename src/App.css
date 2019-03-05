@@ -52,10 +52,29 @@
 .new-question {
   text-align: left;
   border: 1px solid lightgray;
-  margin: 5% 10%;
+  /* margin: 1% 5%; */
   padding: 1% 5%;
+  width: 100%;
 }
 
-.area {
-  /* margin-left: 5%; */
+.sm-button {
+  margin: 5px;
+  padding: 9px;
+  line-height: 0.7em;
+  float: right;
+  background: lightgrey;
+  border-radius: 50%;
+}
+
+.add-new {
+  border-radius: 50%;
+  line-height: 2em;
+  font-size: 2em;
+  width: 2em;
+  height: 2em;
+  background: white;
+  color: green;
+  border: 2px solid green;
+  display: inline-block;
+  align: right;
 }

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+
 import Student from "./student";
-import Admin from "./admin";
+
+import Overview from "./overview";
 
 class Home extends Component {
   state = {
@@ -57,39 +58,107 @@ class Home extends Component {
     ]
   };
 
+  addData = question => {
+    console.log("hello");
+    // console.log(question);
+    this.setState({ quiz: this.state.quiz.concat(question) });
+    console.log("question added");
+  };
+  deleteData = question => {
+    // console.log(question);
+    this.setState({ quiz: this.state.quiz.filter(q => q.id !== question.id) });
+    console.log("question deleted");
+  };
+  editData = question => {
+    const index = this.state.quiz.findIndex(q => q.id === question.id);
+    const temp = [...this.state.quiz];
+    temp[index] = { ...question };
+
+    this.setState({ quiz: temp });
+
+    console.log("question edited");
+  };
+
   render() {
     const { admin, quiz } = this.state;
     return (
       <div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li
-                className="nav-item "
-                onClick={() => {
-                  this.setState({ admin: false });
-                }}
-              >
-                <NavLink className="nav-link" to="/quiz">
-                  Take a Quiz
-                </NavLink>
+        <nav className="navbar navbar-expand-sm navbar-light bg-light">
+          <span className="badge badge-danger badge-pill ">
+            <h3>
+              <i className="fa fa-question" />
+            </h3>
+          </span>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon" />
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mr-auto">
+              <li className={admin ? "nav-item " : "nav-item active"}>
+                <span
+                  class=" nav-link"
+                  onClick={() => {
+                    this.setState({ admin: false });
+                  }}
+                >
+                  Take a quiz
+                </span>
               </li>
-
-              <li
-                className="nav-item"
-                onClick={() => {
-                  this.setState({ admin: true });
-                }}
-              >
-                <NavLink className="nav-link" to="/admin">
+              <li className={admin ? "nav-item active" : "nav-item"}>
+                <span
+                  class=" nav-link"
+                  onClick={() => {
+                    this.setState({ admin: true });
+                  }}
+                >
                   Make a quiz
-                </NavLink>
+                </span>
               </li>
             </ul>
           </div>
         </nav>
+        {/* <nav class="navbar navbar-light bg-light">
+          <form class="form-inline">
+            <button
+              class="btn btn-sm btn-outline-success"
+              type="button"
+              onClick={() => {
+                this.setState({ admin: false });
+              }}
+            >
+              Take a quiz
+            </button>
+            <button
+              class="btn btn-sm btn-outline-success"
+              type="button"
+              onClick={() => {
+                this.setState({ admin: true });
+              }}
+            >
+              Make a quiz
+            </button>
+          </form>
+        </nav> */}
+
         <div className="container">
-          {admin ? <Admin quiz={quiz} /> : <Student quiz={quiz} />}
+          {admin ? (
+            <Overview
+              quiz={quiz}
+              addData={this.addData}
+              deleteData={this.deleteData}
+              editData={this.editData}
+            />
+          ) : (
+            <Student quiz={quiz} />
+          )}
         </div>
       </div>
     );
